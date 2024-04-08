@@ -11,6 +11,8 @@ return {
     opts = {},
   },
 
+  { "nanotee/sqls.nvim" },
+
   {
     "nvim-neo-tree/neo-tree.nvim",
     opts = {
@@ -192,5 +194,20 @@ return {
         status.component.signcolumn(),
       }
     end,
+  },
+
+  {
+    "stevearc/conform.nvim",
+    opts = {
+      formatters = {
+        leptosfmt = {
+          command = os.getenv "HOME" .. "/.cargo/bin/leptosfmt",
+          args = { "--stdin", "$FILENAME" },
+          stdin = true,
+          cwd = require("conform.util").root_file { "leptosfmt.toml" },
+        },
+      },
+      formatters_by_ft = { rust = { "leptosfmt" } },
+    },
   },
 }
